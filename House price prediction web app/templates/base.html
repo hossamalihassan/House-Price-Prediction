@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for("static", filename='css/style.css') }}">
+    <link rel="icon" type="image/x-icon" href="/static/icon/icons8-home-16.png" >
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>House Price Prediction<span> for Perth</span></h1>
+    </header>
+    {% block body %}{% endblock %}
+    <footer>
+        <h1 class="footer-title">House Price Prediction</h1>
+        <p>for Perth</p>
+        <p>An up-to-date dataset to use for prediction</p>
+    </footer>
+</body>
+</html>

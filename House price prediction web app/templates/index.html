@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>House Price Prediction for Perth</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<h1>Enter the house features</h1>
+<form method="POST" action="/" class="inputs-form">
+    <label class="input-label" for="suburb">Suburb</label>
+    <select name="suburb" class="suburb-select">
+    {% for suburb in suburbs %}
+        {% if suburb == inputs_list[0] %}
+        <option selected>{{suburb[0]}}</option>  
+        {% endif %}
+        <option>{{suburb[0]}}</option>  
+    {% endfor %}
+    </select>
+
+    {% for feature in features %}
+    <label class="input-label" for={{feature}}></label>{{feature.capitalize().replace('_', ' ')}}</label>
+    <input class="input" min="1" type="number" name={{feature}} value={{inputs_list[features.index(feature)+1]}}>
+    {% endfor %}
+
+    <button type="submit" class="submit-prediction">Predict</button>
+
+</form>
+{% if prediction != null %}
+<div class="prediction-section">
+    <h2>Price : <span class="predicted-price">A${{ prediction }}</span></h2>
+</div>
+{% endif %}
+</div>
+
+<div class="recent-predictions">
+    <h1 class="recent-predictions-title">Recent predictions</h1>
+    <table>
+        <tr>
+            <th>Suburb</th>
+            {% for feature in features %}
+            <th>{{feature.capitalize().replace('_', ' ')}}</th>
+            {% endfor %}
+            <th>Price</th>
+        </tr>
+
+        {% if recent_predictions != null %}
+            {% for prediction in recent_predictions %}
+            <tr>
+                <td>{{prediction.suburb}}</td>
+                <td>{{prediction.bedrooms}}</td>
+                <td>{{prediction.bathrooms}}</td>
+                <td>{{prediction.floor_area}}</td>
+                <td>{{prediction.price}}</td>
+            </tr>  
+            {% endfor %}
+
+            {% else %}
+                <p>No recent predictions</p>
+        {% endif %}
+    </table>
+</div>
+{% endblock %}
